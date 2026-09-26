@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para ti, siempre</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='6' fill='%23a8763f'/%3E%3C/svg%3E">
+<style>
+
+  /* ============================================================
+     EDITA AQUÍ: cambia los textos entre corchetes por los tuyos.
+     Busca los comentarios "EDITAR" en el HTML más abajo.
+     ============================================================ */
+
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap');
+
+  :root{
+    --paper: #f4efe3;
+    --paper-deep: #ece4d2;
+    --ink: #2b2a21;
+    --ink-soft: #575241;
+    --olive: #56603f;
+    --olive-deep: #333b23;
+    --ember: #a8763f;
+    --ember-soft: #cf9c5f;
+    --line: rgba(43, 42, 33, 0.14);
+    --navh: 52px;
+
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 40px;
+    --space-5: 64px;
+    --space-6: 104px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{
+    scroll-behavior: smooth; overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: calc(var(--navh) + env(safe-area-inset-top, 0px));
+  }
+  ::selection{ background: var(--ember-soft); color: var(--ink); }
+
+  body{
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--paper);
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(168,118,63,0.07), transparent 45%),
+      radial-gradient(ellipse at 85% 100%, rgba(86,96,63,0.09), transparent 50%);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    padding-top: calc(var(--navh) + env(safe-area-inset-top, 0px));
+  }
+
+  svg{ max-width: 100%; }
+  img{ max-width: 100%; height: auto; }
+
+  :focus-visible{ outline: 2px solid var(--olive-deep); outline-offset: 3px; }
+
+  .wrap{ max-width: 620px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Nav de pestañas ---------- */
+  .tabnav{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; justify-content: center; gap: 6px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px;
+    background: rgba(244,239,227,0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .tab-btn{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    background: none; border: none; cursor: pointer;
+    color: var(--ink-soft);
+    padding: 6px 18px;
+    border-radius: 999px;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .tab-btn.active{ background: var(--olive-deep); color: var(--paper); }
+  .tab-btn:not(.active):hover{ background: var(--paper-deep); }
+
+  .tab-content{ display: none; }
+  .tab-content.active{ display: block; }
+
+  /* ---------- Rama decorativa (hilo conductor) ---------- */
+  .branch{ display:flex; justify-content:center; }
+  .branch svg{ width: 130px; height: auto; color: var(--olive); opacity: 0.75; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height: calc(100svh - var(--navh) - env(safe-area-inset-top, 0px));
+    align-items: center;
+    text-align: center; position: relative;
+    padding: 80px 32px calc(80px + env(safe-area-inset-bottom, 0px));
+    opacity: 0; animation: rise 1.5s ease-out 0.2s forwards;
+  }
+  @keyframes rise{ from{ opacity:0; transform: translateY(12px);} to{ opacity:1; transform:translateY(0);} }
+
+  .candle{ width: 42px; height: 64px; margin-bottom: var(--space-4); }
+  .candle .wick{ transform-origin: 21px 46px; animation: sway 4.5s ease-in-out infinite; }
+  @keyframes sway{ 0%,100%{ transform: rotate(0deg);} 50%{ transform: rotate(2.5deg);} }
+
+  .eyebrow-name{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--olive-deep);
+    margin: 0 0 20px;
+    position: relative;
+    padding-bottom: 16px;
+  }
+  .eyebrow-name::after{
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 28px; height: 1px;
+    background: var(--ember);
+    opacity: 0.6;
+  }
+
+  .hero h1{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(38px, 10vw, 72px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-3);
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .hero p.sub{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.3vw, 22px);
+    font-style: italic;
+    color: var(--ink-soft);
+    max-width: 400px; line-height: 1.55; margin: 0;
+  }
+
+  .scroll-hint{
+    position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%);
+    font-size: 11px; letter-spacing: 0.1em; color: #948d78;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .scroll-hint::after{ content:''; width:1px; height:22px; background: linear-gradient(var(--olive), transparent); }
+
+  /* ---------- Sections ---------- */
+  section{
+    min-height: calc(100svh - var(--navh) - env(safe-area-inset-top, 0px));
+    display: flex; flex-direction: column; justify-content: center;
+    padding: var(--space-6) 0; position: relative;
+    scroll-snap-align: start; scroll-snap-stop: always;
+  }
+
+  .kicker{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ember);
+    margin: 0 0 var(--space-2);
+  }
+
+  h2{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(29px, 4.2vw, 40px);
+    line-height: 1.26;
+    margin: 0 0 var(--space-4);
+    max-width: 17ch;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .prose{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(19px, 2.1vw, 21px);
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+  .prose p{ margin: 0 0 var(--space-3); }
+  .prose p:last-child{ margin-bottom: 0; }
+
+  .signature{
+    margin-top: var(--space-4);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 21px;
+    color: var(--olive-deep);
+  }
+
+  /* ---------- Promises ---------- */
+  .promises{
+    list-style: none; padding: 0; margin: var(--space-4) 0 0;
+    display: flex; flex-direction: column; gap: var(--space-3);
+  }
+  .promises li{
+    display: flex; gap: 16px; align-items: flex-start;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; line-height: 1.55; color: var(--ink-soft);
+  }
+  .promises li svg{ flex: none; width: 16px; height: 16px; margin-top: 6px; color: var(--ember); }
+
+  /* ---------- Closing ---------- */
+  .closing{ text-align: center; }
+  .closing h2{ max-width: none; margin-left: auto; margin-right: auto; }
+  .closing .prose{ margin: 0 auto; }
+
+  .promise-ask{
+    margin-top: var(--space-4);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(20px, 2.6vw, 24px);
+    color: var(--ember);
+  }
+
+  footer{
+    text-align: center;
+    padding: var(--space-3) 20px calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 14px; color: #9a9782;
+  }
+
+  /* ---------- Pestaña "Nosotros": loader tipo login ---------- */
+  .login-loader{
+    min-height: 60svh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: var(--space-3);
+    text-align: center;
+  }
+  .spinner{
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 2px solid var(--line);
+    border-top-color: var(--ember);
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+  .login-loader p{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+
+  .photo-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: var(--space-4);
+  }
+  .photo-frame{
+    aspect-ratio: 4/5;
+    border: 1px dashed var(--ember-soft);
+    border-radius: 4px;
+    background: var(--paper-deep);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+    color: #a39a80;
+    overflow: hidden;
+  }
+  .photo-frame img{ width: 100%; height: 100%; object-fit: cover; }
+  .photo-frame svg{ width: 26px; height: 26px; }
+  .photo-frame span{
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 0.02em; text-align: center; padding: 0 10px;
+  }
+  .photo-frame:first-child{ grid-column: span 2; aspect-ratio: 16/10; }
+
+  @media (max-width: 640px){
+    .wrap{ padding: 0 24px; }
+    section{ padding: var(--space-5) 0; }
+    .hero{ padding: 56px 24px calc(56px + env(safe-area-inset-bottom, 0px)); }
+    .prose{ font-size: 18px; line-height: 1.72; }
+    .promises li{ font-size: 18px; }
+    h2{ margin-bottom: var(--space-3); }
+    .branch svg{ width: 108px; }
+    .photo-grid{ grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 380px){
+    .wrap{ padding: 0 20px; }
+    .hero h1{ font-size: 34px; }
+    .eyebrow-name{ font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero{ animation: none; opacity: 1; }
+    .candle .wick{ animation: none; }
+    .spinner{ animation: none; border-top-color: var(--line); }
+  }
+
+</style>
+</head>
+<body>
+
+  <nav class="tabnav" aria-label="Navegación">
+    <button class="tab-btn active" style="pointer-events:none;">Inicio</button>
+    <button class="tab-btn" onclick="irANosotros()">Nosotros</button>
+  </nav>
+
+
+
+    <section class="hero">
+      <svg class="candle" viewBox="0 0 42 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="16" y="26" width="10" height="32" rx="1.5" fill="#e9ddc4"/>
+        <rect x="16" y="26" width="10" height="32" rx="1.5" fill="url(#waxShade)"/>
+        <g class="wick">
+          <line x1="21" y1="26" x2="21" y2="18" stroke="#57503f" stroke-width="1.3"/>
+          <ellipse cx="21" cy="10" rx="4.4" ry="7.4" fill="url(#flameGrad)"/>
+          <ellipse cx="21" cy="12" rx="1.6" ry="3.2" fill="#fff6df" opacity="0.85"/>
+        </g>
+        <defs>
+          <linearGradient id="waxShade" x1="16" y1="26" x2="26" y2="58" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#ffffff" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#000000" stop-opacity="0.07"/>
+          </linearGradient>
+          <radialGradient id="flameGrad" cx="0.5" cy="0.65" r="0.65">
+            <stop offset="0%" stop-color="#fff3cf"/>
+            <stop offset="45%" stop-color="#eab871"/>
+            <stop offset="100%" stop-color="#a8763f" stop-opacity="0.4"/>
+          </radialGradient>
+        </defs>
+      </svg>
+
+      <!-- EDITAR: nombre de la abuelita -->
+      <p class="eyebrow-name">En memoria de doña María</p>
+      <!-- EDITAR: nombre de tu novia -->
+      <h1>Para ti, Isa</h1>
+      <p class="sub">Un pequeño espacio hecho con cariño, solo para ti.</p>
+      <div class="scroll-hint">desliza despacio</div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="kicker">Un pensamiento para ti</p>
+        <h2>Solo quería recordarte cuánto te quiero.</h2>
+        <div class="prose">
+          <!-- EDITAR: tu mensaje personal -->
+          <p>
+            Pienso en ti estos días, y en todo el amor que le tenías a tu abuelita.
+            Ese cariño no se va a ningún lado — se queda contigo, en lo que ella te enseñó
+            y en la forma en que la recuerdas.
+          </p>
+          <p>
+            No necesitas estar de una manera en particular. Si quieres reír, reímos.
+            Si quieres hablar de ella, te escucho. Y si solo quieres estar tranquila,
+            también está bien. Aquí estoy, como siempre.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="branch" style="margin-bottom:56px;">
+          <svg viewBox="0 0 140 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12 C 40 4, 100 4, 138 12" stroke="currentColor" stroke-width="1" fill="none"/>
+            <path d="M30 9 C 33 4, 38 4, 40 9 C 38 12, 33 12, 30 9 Z" fill="currentColor"/>
+            <path d="M68 6 C 71 1, 76 1, 78 6 C 76 9, 71 9, 68 6 Z" fill="currentColor"/>
+            <path d="M100 9 C 103 4, 108 4, 110 9 C 108 12, 103 12, 100 9 Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <p class="kicker">Lo que quiero que sepas</p>
+        <h2>Voy a estar aquí, pase lo que pase.</h2>
+        <ul class="promises">
+          <li><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1 C 11 4, 14 6, 8 15 C 2 6, 5 4, 8 1 Z" fill="currentColor"/></svg>Celebrando contigo cada cosa buena, por pequeña que sea.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1 C 11 4, 14 6, 8 15 C 2 6, 5 4, 8 1 Z" fill="currentColor"/></svg>Escuchando siempre que quieras contarme algo de ella.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1 C 11 4, 14 6, 8 15 C 2 6, 5 4, 8 1 Z" fill="currentColor"/></svg>Riendo juntos, porque también se vale estar bien.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1 C 11 4, 14 6, 8 15 C 2 6, 5 4, 8 1 Z" fill="currentColor"/></svg>Y en calma, cuando solo quieras que te acompañen sin hablar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap">
+        <div class="branch" style="margin-bottom:56px;">
+          <svg viewBox="0 0 140 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12 C 40 20, 100 20, 138 12" stroke="currentColor" stroke-width="1" fill="none"/>
+            <path d="M30 15 C 33 20, 38 20, 40 15 C 38 12, 33 12, 30 15 Z" fill="currentColor"/>
+            <path d="M68 18 C 71 23, 76 23, 78 18 C 76 15, 71 15, 68 18 Z" fill="currentColor"/>
+            <path d="M100 15 C 103 20, 108 20, 110 15 C 108 12, 103 12, 100 15 Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <p class="kicker">Y ya para cerrar</p>
+        <h2>Te quiero, hoy y siempre.</h2>
+        <div class="prose">
+          <!-- EDITAR: cierre / firma -->
+          <p>
+            Esta página es pequeña, pero es una forma de decirte que te tengo presente
+            y que me da mucho gusto acompañarte en todo, lo lindo y lo difícil.
+          </p>
+        </div>
+        <p class="signature">— Tu feo novio Kevin</p>
+        <p class="promise-ask">¿Me prometes que vamos a estar bien?</p>
+      </div>
+    </section>
+
+  
+<footer>hecho con cariño, para ti</footer>
+
+  <div id="login-overlay" style="display:none; position:fixed; inset:0; z-index:100; background:var(--paper); flex-direction:column; align-items:center; justify-content:center; gap:24px;">
+    <div class="spinner"></div>
+    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:var(--ink-soft);">Iniciando sesión…</p>
+  </div>
+
+  <script>
+    function irANosotros(){
+      var overlay = document.getElementById('login-overlay');
+      overlay.style.display = 'flex';
+      setTimeout(function(){ window.location.href = 'nosotros.html'; }, 1300);
+    }
+  </script>
+
+</body>
+</html>
